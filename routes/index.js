@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 
-const gymRoutes = require("./gymRoutes");
+const gymRoutes = require("./xyRoutes");
 
 router.use(gymRoutes)
 

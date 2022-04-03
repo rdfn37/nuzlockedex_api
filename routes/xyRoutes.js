@@ -1,0 +1,14 @@
+const { Router } = require("express");
+const router = Router();
+const XYController = require("../controllers/XYController");
+
+router.post("/add_gym", XYController.createGym);
+router.get("/xy_gyms", XYController.readGyms);
+
+router.post("/add_league_member", XYController.createLeagueMember)
+router.get("/xy_league_members", XYController.readLeagueMembers)
+
+router.post("/add_rival_battle", XYController.createRivalBattle)
+router.get("/xy_rival_battles", XYController.readRivalBattles)
+
+module.exports = router;

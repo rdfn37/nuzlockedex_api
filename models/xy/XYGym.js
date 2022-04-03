@@ -1,6 +1,6 @@
 const { model, Schema } = require("mongoose");
 
-const Gym = model(
+const XYGym = model(
   "pkm_xy_gym",
   new Schema({
     location: { type: String, required: true },
@@ -15,4 +15,4 @@ const Gym = model(
   })
 );
 
-module.exports = Gym;
+module.exports = XYGym;
