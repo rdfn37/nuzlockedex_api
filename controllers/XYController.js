@@ -1,5 +1,6 @@
 const XYGym = require("../models/xy/XYGym");
 const XYLeagueMember = require("../models/xy/XYLeagueMember");
+const XYLysandreBattle = require("../models/xy/XYLysandre");
 const XYRivalBattle = require("../models/xy/XYRivalBattle");
 const { ObjectId } = require("mongoose").Types;
 
@@ -43,6 +44,7 @@ class GymController {
 
     res.status(201).json({ message: "New league member added!" });
   }
+
   static async createRivalBattle(req, res) {
     const { order, reward, location, teams } = req.body;
 
@@ -62,6 +64,26 @@ class GymController {
     res.status(201).json({ message: "New rival battle added!" });
   }
 
+  static async createLysandreBattle(req, res) {
+    const { order, reward, location, img_url, team } = req.body;
+
+    const lysandreBattle = XYLysandreBattle({
+      order,
+      reward,
+      location,
+      img_url,
+      team,
+    });
+    try {
+      await lysandreBattle.save();
+    } catch {
+      res.status(201).json({ message: "Error!" });
+      return;
+    }
+
+    res.status(201).json({ message: "New Lysandre battle added!" });
+  }
+
   static async readGyms(req, res) {
     const gyms = await XYGym.find().lean();
 
@@ -78,6 +100,12 @@ class GymController {
     const rivalBattles = await XYRivalBattle.find().lean();
 
     res.json(rivalBattles);
+  }
+
+  static async readLysandreBattles(req, res) {
+    const lysandreBattles = await XYLysandreBattle.find().lean();
+
+    res.json(lysandreBattles);
   }
 }
 
