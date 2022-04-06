@@ -1,3 +1,4 @@
+const XYAzBattle = require("../models/xy/XYAz");
 const XYGym = require("../models/xy/XYGym");
 const XYLeagueMember = require("../models/xy/XYLeagueMember");
 const XYLysandreBattle = require("../models/xy/XYLysandre");
@@ -83,6 +84,24 @@ class GymController {
 
     res.status(201).json({ message: "New Lysandre battle added!" });
   }
+  static async createAzBattle(req, res) {
+    const { reward, location, img_url, team } = req.body;
+
+    const azBattle = XYAzBattle({
+      reward,
+      location,
+      img_url,
+      team,
+    });
+    try {
+      await azBattle.save();
+    } catch {
+      res.status(201).json({ message: "Error!" });
+      return;
+    }
+
+    res.status(201).json({ message: "New AZ battle added!" });
+  }
 
   static async readGyms(req, res) {
     const gyms = await XYGym.find().lean();
@@ -106,6 +125,12 @@ class GymController {
     const lysandreBattles = await XYLysandreBattle.find().lean();
 
     res.json(lysandreBattles);
+  }
+
+  static async readAzBattles(req, res) {
+    const azBattles = await XYAzBattle.find().lean();
+
+    res.json(azBattles);
   }
 }
 

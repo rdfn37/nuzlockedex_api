@@ -14,4 +14,7 @@ router.get("/xy_rival_battles", XYController.readRivalBattles);
 router.post("/add_lysandre_battle", XYController.createLysandreBattle);
 router.get("/xy_lysandre_battles", XYController.readLysandreBattles);
 
+router.post("/add_az_battle", XYController.createAzBattle);
+router.get("/xy_az_battles", XYController.readAzBattles);
+
 module.exports = router;
